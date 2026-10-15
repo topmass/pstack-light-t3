@@ -20,14 +20,16 @@ That cost pays off on a migration or a cross-cutting redesign. Most daily work i
 
 | Rule | pstack-t3 | pstack-light |
 |---|---|---|
-| Task size | Every task runs a playbook | A small task skips the playbook and every fan-out skill |
+| Task size | Every task runs a playbook | A small task skips delegation and every fan-out skill. A small bug still gets reproduced and verified |
 | `architect` | Any code that crosses a function boundary | A change to an interface that more than one module uses |
+| `interrogate` on PR open | Every subagent that opens a PR | Only when the playbook calls for it and the diff has no review yet |
 | `arena` in the Feature playbook | Mandatory when more than one design is valid | Only when the design is still open and a wrong pick is costly to undo |
 | `how` and `why` in the Bug fix playbook | Always | `how` only for an unread subsystem, `why` only for a regression whose history matters |
 | Panel size with no models file | Up to three seats | Up to two seats |
-| Reasoning effort | Starts at xhigh and can rise to max | Starts at high and needs your yes to go higher |
-| External actions | Team chat, tickets, and evals proceed without asking | They need your yes first |
-| `unslop` | pstack's own rules | Defers to a `house-style` skill if you have one |
+| Reasoning effort | Starts at xhigh and can rise to max | Capped by the ceiling you pick in `/setup-pstack`, high by default |
+| Model routing | One model per role | Optional routes send a kind of work, such as backend, to one model |
+| Actions outside the repo | Team chat, tickets, and evals proceed without asking | They need your yes. PR replies still proceed |
+| `unslop` | pstack's own rules | Defers to a `house-style` skill if you have one. You do not need one |
 
 The Feature playbook still delegates every diff to a child agent. That keeps the author and the reviewer separate, which is where pstack catches most mistakes.
 
@@ -46,13 +48,22 @@ git clone https://github.com/topmass/pstack-light-t3 ~/Code/pstack-light-t3
 for d in ~/Code/pstack-light-t3/skills/*/; do ln -s "$d" ~/.agents/skills/; done
 ```
 
+`ln` reports "File exists" for a skill name you already have, such as `tdd` or `unslop`. Remove or rename your copy first, or that one pstack skill stays unlinked.
+
 You also need `gh` and [Bun](https://bun.sh). The `orch` and `watch-pr` scripts run on Bun.
 
 ## Get started
 
-1. Run `/setup-pstack`. Pick the `medium - high reasoning` budget. The skill writes one model per role to `~/.config/pstack/pstack-models.md`.
-2. Run `/poteto-mode` for features and hard bugs. The agent states the size it picked. Small fixes do not need it.
+1. Run `/setup-pstack`. It reads the models T3 offers and asks you a few questions:
+   - **Setup style.** `recommended` picks the models and effort for you. `models` lets you pick a model per group of roles while agents pick the effort for each job. `full` lets you pick both.
+   - **Budget.** The budget sets the effort ceiling. No agent runs above it. We recommend `medium - high reasoning`.
+   - **Routes.** You can send a kind of work to one model, for example deterministic backend work to a fast coding model.
+
+   It writes your answers to `~/.config/pstack/pstack-models.md`. Run it again any time to change them.
+2. Run `/poteto-mode` for features, hard bugs, and migrations. The agent sizes the task and states the size it picked.
 3. Run `/poteto-help` when you are not sure which skill fits.
+
+Without a models file, each role runs on the model of the thread that started it. Panels get two seats, and effort stops at high.
 
 Codex threads type `$<name>` where this README writes `/<name>`.
 
@@ -78,10 +89,11 @@ Every delegated agent is a T3 `delegate_task` child on the model you picked for 
 
 ## Staying current
 
-This fork tracks pstack-t3 as the `upstream` remote. To sync, run `git fetch upstream && git merge upstream/main` and keep every change in the table above. Then run these checks:
+This fork tracks pstack-t3 as the `upstream` remote. To sync, run `git fetch upstream && git merge upstream/main` and keep every change in the table above. `scripts/check-light.mjs` fails when a merge drops one. Then run these checks:
 
 ```bash
 node scripts/check-t3-native.mjs
+node scripts/check-light.mjs
 cd skills/poteto-mode/scripts && bun test && bun run typecheck
 ```
 

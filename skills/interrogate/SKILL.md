@@ -26,7 +26,7 @@ Before spawning reviewers, state the intent in one clear paragraph from the user
 
 ## Step 3, Spawn Reviewers
 
-Launch all reviewers in a single message, one `delegate_task` child per entry on the `interrogate reviewers` line in `~/.config/pstack/pstack-models.md`, labeled Reviewer A, B, and so on to match the entry count. If the file or that line is missing, run Reviewer A on the parent thread's model and one more reviewer on the strongest model of each other provider that `orchestrator_capabilities` reports with `canRunChildTask`, up to three reviewers. Say so and suggest `/setup-pstack`.
+Launch all reviewers in a single message, one `delegate_task` child per entry on the `interrogate reviewers` line in `~/.config/pstack/pstack-models.md`, labeled Reviewer A, B, and so on to match the entry count. If the file or that line is missing, run Reviewer A on the parent thread's model and one more reviewer on the strongest model of each other provider that `orchestrator_capabilities` reports with `canRunChildTask`, up to two reviewers. Say so and suggest `/setup-pstack`.
 
 Each reviewer gets the title `interrogate reviewer <label>`, a brief that says read-only: inspect only, no writes, no git commands, and `target` set from its entry per the Subagents section. Omit `target` for an `auto` or `inherit-parent` entry, so that reviewer runs on the parent model.
 

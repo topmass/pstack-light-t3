@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Unslop
 
+If a skill named house-style is installed beside this skill, read its SKILL.md and follow it instead of this file.
+
 Edit text to remove AI patterns. Scan for the patterns below, then rewrite. Preserve meaning and match the intended tone.
 
 ## Patterns to detect and fix

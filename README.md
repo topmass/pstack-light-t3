@@ -36,10 +36,10 @@ The Feature playbook still delegates every diff to a child agent. That keeps the
 ## Install
 
 ```bash
-npx skills add topmass/pstack-light-t3 -g -a claude-code -a codex
+npx skills add topmass/pstack-light-t3 -g -a claude-code -a codex --skill '*' -y
 ```
 
-This command copies each skill into `~/.agents/skills/` for Codex and links it from `~/.claude/skills/` for Claude Code. Install globally or per project, but not both. Codex loads neither copy when the same skill name exists in both places.
+This command installs all 55 skills without a picker. The skills name each other, so install them all. It copies each skill into `~/.agents/skills/` for Codex and links it from `~/.claude/skills/` for Claude Code. Install globally or per project, but not both. Codex loads neither copy when the same skill name exists in both places.
 
 Some setups make `~/.claude/skills` a symlink to `~/.agents/skills`. In that setup, clone the repo and link each skill yourself:
 
@@ -103,4 +103,4 @@ pstack is by [Lauren Tan](https://x.com/poteto), from [cursor/plugins](https://g
 
 ## License
 
-MIT. [LICENSE](./LICENSE) keeps the upstream copyright notices.
+MIT. [LICENSE](./LICENSE) keeps the upstream copyright notices. Each skill folder carries a copy as `LICENSE.txt`.

@@ -30,6 +30,17 @@ const INVARIANTS = [
   ["skills/unslop/SKILL.md", "If a skill named house-style is installed beside this skill"],
   ["skills/poteto-help/SKILL.md", SHARED_INTERFACE],
   ["skills/poteto-help/SKILL.md", "github.com/topmass/pstack-light-t3"],
+  ["skills/poteto-mode/playbooks/opening-a-pr.md", "Never `reset --hard` a branch with unpushed work"],
+  ["skills/poteto-mode/SKILL.md", "passes `target` with the parent's provider and model and the cap as effort"],
+  ["skills/poteto-mode/SKILL.md", "is a `delegate_task` child with `isolation: \"worktree\"`"],
+  ["skills/reflect/SKILL.md", "only when the operator has granted tracker writes"],
+  ["skills/no-comments/SKILL.md", SHARED_INTERFACE],
+  ["skills/setup-pstack/SKILL.md", "the first listed route wins"],
+  ...["arena", "swarm", "interrogate", "how", "why"].map((name) => [`skills/${name}/SKILL.md`, "If the parent runs above the effort cap"]),
+  ["skills/poteto-mode/playbooks/multi-phase-plan.md", "<N> lanes on"],
+  ["skills/poteto-mode/scripts/check-plan.mjs", "lanes declared, expected 1 to 10"],
+  ["skills/poteto-mode/scripts/worktree-audit.sh", "date -d \"@$last_ts\""],
+  ["README.md", "--skill '*' -y"],
 ];
 
 // Upstream text that must not come back beside a light patch.
@@ -45,6 +56,10 @@ const FORBIDDEN = [
   ["skills/setup-pstack/SKILL.md", "<entry>, <entry>, <entry>"],
   ["skills/arena/SKILL.md", "up to three"],
   ["skills/interrogate/SKILL.md", "up to three"],
+  ["skills/poteto-mode/playbooks/opening-a-pr.md", "git reset --hard origin/"],
+  ["skills/reflect/SKILL.md", "backlog tracker without waiting"],
+  ["skills/poteto-mode/playbooks/multi-phase-plan.md", "Ten lanes"],
+  ["skills/poteto-mode/scripts/check-plan.mjs", "Ten lanes"],
 ];
 
 const has = ([file, text]) => readFileSync(join(ROOT, file), "utf8").includes(text);

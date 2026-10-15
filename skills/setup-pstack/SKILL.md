@@ -48,7 +48,7 @@ Write `~/.config/pstack/pstack-models.md` (create `~/.config/pstack/` if it is m
 
 ```
 # pstack model configuration. One line per role. Delete a line to fall back to the skill default.
-# `inherit-parent` or `auto` as a value: the role runs on the parent thread's model (omit delegate_task `target`). Alias entries in a panel list still count toward its fan-out.
+# `inherit-parent` or `auto` as a value: the role runs on the parent thread's model (omit delegate_task `target` unless the parent runs above the effort ceiling). Alias entries in a panel list still count toward its fan-out.
 # effort mode pick: an agent starts at the entry's effort and lowers it for routine work. fixed: entries run as written. No spawn exceeds the ceiling.
 # budget: medium (high)
 effort mode: pick

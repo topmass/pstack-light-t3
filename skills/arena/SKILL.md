@@ -21,7 +21,7 @@ Every candidate gets the same prompt, so the prompt is the contract.
 
 ## Phase B: Fan out
 
-Spawn all N candidates in one turn, each with the task, the absolute path to the shared grounding, its own output path, and instructions to produce the artifact and a short rationale naming the alternatives it considered and what it rejected. Every candidate is a `delegate_task` child with `mode: "async"`, titled `arena <slug>: candidate <n>`, with `target` from its seat. A candidate that writes code also gets `isolation: "worktree"`, and its brief says to create branch `arena-<slug>-<n>`, commit there, and report its worktree path. Any other candidate gets its `/tmp` output path. Its completion notification wakes you.
+Spawn all N candidates in one turn, each with the task, the absolute path to the shared grounding, its own output path, and instructions to produce the artifact and a short rationale naming the alternatives it considered and what it rejected. Every candidate is a `delegate_task` child with `mode: "async"`, titled `arena <slug>: candidate <n>`, with `target` from its seat. A candidate that writes code also gets `isolation: "worktree"`, and its brief says to create branch `arena-<slug>-<n>`, commit there before reporting, and report its worktree path. When a candidate's worktree path is gone, read its committed branch `arena-<slug>-<n>`, or add a worktree for that branch with `git worktree add`. Any other candidate gets its `/tmp` output path. Its completion notification wakes you.
 
 If a candidate produces no output, proceed with N-1 and note the dropout.
 

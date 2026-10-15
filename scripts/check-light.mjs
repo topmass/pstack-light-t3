@@ -41,6 +41,8 @@ const INVARIANTS = [
   ["skills/poteto-mode/scripts/check-plan.mjs", "lanes declared, expected 1 to 10"],
   ["skills/poteto-mode/scripts/worktree-audit.sh", "date -d \"@$last_ts\""],
   ["README.md", "--skill '*' -y"],
+  ...["skills/swarm/SKILL.md", "skills/figure-it-out/SKILL.md", "skills/arena/SKILL.md", "skills/poteto-help/SKILL.md", "skills/poteto-mode/playbooks/orchestrate.md", "skills/poteto-mode/playbooks/visual-parity.md", "skills/poteto-mode/playbooks/multi-phase-plan.md", "skills/poteto-mode/playbooks/hillclimb.md"].map((file) => [file, "isolation: \"worktree\""]),
+  ["skills/arena/SKILL.md", "When a candidate's worktree path is gone"],
 ];
 
 // Upstream text that must not come back beside a light patch.

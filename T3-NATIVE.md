@@ -80,7 +80,7 @@ interrogate reviewers: <entry>, <entry>
 ```
 
 - `effort mode: pick` lets an agent start at the entry's effort and lower it for routine work. `fixed` runs entries as written. `effort ceiling` caps every spawn, high when missing.
-- `route <work type>: <entry>` replaces the role's model for code-writing and verification delegates whose work matches. Panel seats keep their entries.
+- `route <work type>: <entry>` replaces the role's model for code-writing and verification delegates whose work matches. Panel seats keep their entries. A route's written effort may exceed the ceiling.
 
 - An entry is `<providerInstanceId>/<model>` with an optional `(<effort>)`, validated against `orchestrator_capabilities`. A model with no effort option takes no `(<effort>)`. `inherit-parent` (or `auto`) runs the role on the parent thread's model: omit `target`.
 - Pass an entry as `target: {"providerInstanceId": ..., "model": ..., "options": {"<effort option id>": "<effort>"}}`. The effort option id is the one `orchestrator_capabilities` lists for that model (`effort` on Claude, `reasoningEffort` on Codex).

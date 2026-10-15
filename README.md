@@ -63,7 +63,7 @@ You also need `gh` and [Bun](https://bun.sh). The `orch` and `watch-pr` scripts 
 2. Run `/poteto-mode` for features, hard bugs, and migrations. The agent sizes the task and states the size it picked.
 3. Run `/poteto-help` when you are not sure which skill fits.
 
-Without a models file, each role runs on the model of the thread that started it. Panels get two seats, and effort stops at high.
+Without a models file, each role runs on the model of the thread that started it. Panels get two seats, and effort stops at high. When T3 rejects a configured model, a skill uses the closest model from the same provider and says so in its reply.
 
 Codex threads type `$<name>` where this README writes `/<name>`.
 

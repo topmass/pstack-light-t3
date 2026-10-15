@@ -12,7 +12,7 @@ Answer the user's question about pstack, hand them a prompt they can send, and l
 
 A message that asks for work, such as "use pstack to fix this bug", is not a help question. Read [`poteto-mode`](../poteto-mode/SKILL.md), do the work under it, and mention once that starting each task with `/poteto-mode` keeps it on.
 
-This file maps questions to the skills and references that hold the answers. Those files own the details. Read the file you route to before you quote it, and trust it when it disagrees with this map. The links here point into the installed skills, which the user may not be able to open, so give the user the file's public copy: `https://github.com/mariusflorescu/pstack-t3/blob/main/skills/` followed by its path under `skills/`.
+This file maps questions to the skills and references that hold the answers. Those files own the details. Read the file you route to before you quote it, and trust it when it disagrees with this map. The links here point into the installed skills, which the user may not be able to open, so give the user the file's public copy: `https://github.com/topmass/pstack-light-t3/blob/main/skills/` followed by its path under `skills/`.
 
 ## Find out what they need
 
@@ -36,11 +36,11 @@ When the models file is missing and it matters, ask whether the user wants to pi
 
 ## Get set up
 
-1. Install with `npx skills add mariusflorescu/pstack-t3 -g -a claude-code -a codex`. Codex threads run skills as `$<name>` where pstack writes `/<name>`.
+1. Install with `npx skills add topmass/pstack-light-t3 -g -a claude-code -a codex`. Codex threads run skills as `$<name>` where pstack writes `/<name>`.
 2. Run [`/setup-pstack`](../setup-pstack/SKILL.md). It asks for a reasoning budget, maps a model to each role, and writes `~/.config/pstack/pstack-models.md`. Skills read it the next time they delegate.
 3. Start a real task with `/poteto-mode`, a goal, and a check that can pass or fail.
 
-Installing changes almost nothing until the user invokes a skill. Only `/setup-pstack` and `deslop` can load from the user's words, and `typescript-best-practices` loads when the agent works on `.ts` or `.tsx` files. The [repo](https://github.com/mariusflorescu/pstack-t3) has the details. Offer to word their first prompt with them, per [`references/prompting.md`](references/prompting.md).
+Installing changes almost nothing until the user invokes a skill. Only `/setup-pstack` and `deslop` can load from the user's words, and `typescript-best-practices` loads when the agent works on `.ts` or `.tsx` files. The [repo](https://github.com/topmass/pstack-light-t3) has the details. Offer to word their first prompt with them, per [`references/prompting.md`](references/prompting.md).
 
 If cost is the worry, say where the tokens go and how to spend fewer. pstack spends extra tokens on subagents and review panels. Rerun `/setup-pstack` and pick a smaller budget or cheaper models. A role set to `auto` or `inherit-parent` runs on the parent thread's model, which saves tokens when the thread runs on a cheaper model. A shorter panel list runs fewer subagents, one for each entry. Save `/poteto-mode` for work that needs rigor.
 
@@ -69,7 +69,7 @@ The default answer is `/poteto-mode`, which runs most of the others when its ste
 | Catch up on their own recent work on a topic | [`/recall`](../recall/SKILL.md) |
 | Catch up on what changed in this chat since their last message, in a few plain sentences and small visuals, with enough context to decide each action item | [`/ketchup`](../ketchup/SKILL.md) |
 | Know what a small diff could break outside itself | [`/blast-radius`](../blast-radius/SKILL.md) |
-| Settle types and module shape before code that crosses a function boundary | [`/architect`](../architect/SKILL.md) |
+| Settle types and module shape before code that adds or changes an interface used by more than one module | [`/architect`](../architect/SKILL.md) |
 | Get several attempts at one brief, merged into the best one | [`/arena`](../arena/SKILL.md) |
 | Run parallel checks over slices, or race workers, as subagents | [`/swarm`](../swarm/SKILL.md) |
 | Have different models review a diff and try to break it | [`/interrogate`](../interrogate/SKILL.md) |
@@ -119,11 +119,11 @@ Playbooks are step lists inside `/poteto-mode`, not skills, so they have no slas
 - "full autopilot on this queue" runs Autopilot-full. "stack them, don't ship" runs Autopilot-stack.
 - "run the eval playbook" runs Eval.
 
-The Playbooks section of [`poteto-mode`](../poteto-mode/SKILL.md) lists every playbook and when it applies. The [playbooks](https://github.com/mariusflorescu/pstack-t3/tree/main/skills/poteto-mode/playbooks) cover opening, babysitting, and landing a PR.
+The Playbooks section of [`poteto-mode`](../poteto-mode/SKILL.md) lists every playbook and when it applies. The [playbooks](https://github.com/topmass/pstack-light-t3/tree/main/skills/poteto-mode/playbooks) cover opening, babysitting, and landing a PR.
 
 pstack has no planning skill. T3 Code's plan mode works alongside it. For work that spans phases or stacked PRs, asking `/poteto-mode` for a plan runs the [Multi-phase plan playbook](../poteto-mode/playbooks/multi-phase-plan.md), which writes the plan and doesn't implement it. For a design question, the Prototype playbook or `/architect` settles it in code first.
 
-Principles are one-rule skills that `/poteto-mode` reads and cites in its replies. The user rarely invokes one. They steer with the names instead, as in "apply prove it works. show me the real output." Typing `/principle-<name>` still loads one on demand. The [repo](https://github.com/mariusflorescu/pstack-t3/tree/main/skills) lists them.
+Principles are one-rule skills that `/poteto-mode` reads and cites in its replies. The user rarely invokes one. They steer with the names instead, as in "apply prove it works. show me the real output." Typing `/principle-<name>` still loads one on demand. The [repo](https://github.com/topmass/pstack-light-t3/tree/main/skills) lists them.
 
 ## Fix a run that went wrong
 
@@ -147,7 +147,7 @@ For a run that drifts, [`references/prompting.md`](references/prompting.md) has 
 - `/poteto-mode write a skill for <workflow>` runs the authoring playbook. The eval playbook tests a skill change blind.
 - Fix a misbehaving skill in its own PR, not inside the feature work where it went wrong.
 
-The [repo](https://github.com/mariusflorescu/pstack-t3) covers each of these.
+The [repo](https://github.com/topmass/pstack-light-t3) covers each of these.
 
 ## Reply
 
